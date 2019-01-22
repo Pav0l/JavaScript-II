@@ -48,4 +48,5 @@ const counterFactory = () => {
 };
 
 const valueStore = counterFactory();
-valueStore.increment()
+valueStore.increment();
+valueStore.decrement();

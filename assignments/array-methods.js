@@ -75,6 +75,7 @@ const drunkDirectorRequest = runnersArr => {
 }
 drunkDirectorRequest(runners);
 
+
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 const largeRunners = runnersArr => {
@@ -86,6 +87,7 @@ const largeRunners = runnersArr => {
 }
 largeRunners(runners);
 
+
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
 const calcDonations = runnersArr => {
@@ -96,6 +98,7 @@ const calcDonations = runnersArr => {
     console.log(ticketPriceTotal);
 }
 calcDonations(runners);
+
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  
@@ -118,6 +121,7 @@ const biggestDonor = runnersArr => {
 }
 biggestDonor(runners);
 
+
 // Problem 2 - Count how many shirts of each size will the organizators need
 const countShirtSizes = runnersArr => {
     const newArr = Array.from(runnersArr);
@@ -129,6 +133,7 @@ const countShirtSizes = runnersArr => {
     console.log(shirtsObj);
 }
 countShirtSizes(runners);
+
 
 // Problem 3 - find all email adresses without .com ending
 const mailFilter = runnersArr => {
@@ -149,6 +154,7 @@ const avgDonation = runnersArr => {
     console.log(JSON.stringify(newArr));
 }
 avgDonation(runners);
+
 
 // Problem 5 -shirt company announced, that their sizes are slightly off and they should size-up every runners tshirt -> so every runner's size of tshirt changed.
 const upShirts = runnersArr => {
@@ -171,6 +177,6 @@ const upShirts = runnersArr => {
             break;
         }
     }
-    console.log(newArr);
+    console.log(JSON.stringify(newArr));
 }
 upShirts(runners);
