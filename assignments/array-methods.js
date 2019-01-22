@@ -60,7 +60,7 @@ const getFullName = runnersArr => {
     let fullName = [];
     const newArr = Array.from(runnersArr);
     newArr.forEach(item => fullName.push(`${item.first_name} ${item.last_name}`));   //this could be a one-liner
-    console.log(fullName);
+    console.log("Array of full names: ", fullName);
 }
 getFullName(runners);
 
@@ -71,21 +71,20 @@ const drunkDirectorRequest = runnersArr => {
     let allCaps = [];
     const newArr = Array.from(runnersArr);
     newArr.map(items => allCaps.push(items.first_name.toUpperCase()));   //this could be a one-liner
-    console.log(allCaps);
+    console.log("Array of uppercase names: ", allCaps);
 }
 drunkDirectorRequest(runners);
 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-const largeRunners = runnersArr => {
+const largeRunners = (runnersArr, size) => {
     let largeShirts = [];
     const newArr = Array.from(runnersArr);
-    largeShirts = newArr.filter(items => items.shirt_size === 'L');  //this could be a one-liner
-    console.log(largeShirts);
-    // return largeShirts
+    largeShirts = newArr.filter(items => items.shirt_size === size);  //this could be a one-liner
+    console.log("Array of runners with L size shirts: ", largeShirts);
 }
-largeRunners(runners);
+largeRunners(runners, 'L');
 
 
 // ==== Challenge 4: Use .reduce() ====
@@ -95,7 +94,7 @@ const calcDonations = runnersArr => {
     const newArr = Array.from(runnersArr);
     const reducer = (accumulator, currentItem) => accumulator + currentItem.donation;
     ticketPriceTotal = newArr.reduce(reducer, 0);    
-    console.log(ticketPriceTotal);
+    console.log(`Total ticket price is ${ticketPriceTotal}.` );
 }
 calcDonations(runners);
 
@@ -130,7 +129,7 @@ const countShirtSizes = runnersArr => {
     allShirts.forEach(item => {
         shirtsObj[item] = (shirtsObj[item] || 0) + 1;
     })
-    console.log(shirtsObj);
+    console.log("Organizators will need this many shirts: ", shirtsObj);
 }
 countShirtSizes(runners);
 
@@ -141,7 +140,7 @@ const mailFilter = runnersArr => {
     let mailArr = newArr.map(item => item.email);
     let filtMail = mailArr.filter(item => !item.includes('.com'));
     // let filtMail = newArr.map(item => item.email).filter(item => !item.includes('.com'));  // One liner
-    console.log(filtMail);
+    console.log("Emails without .com are: ", filtMail);
 }
 mailFilter(runners);
 
@@ -151,32 +150,32 @@ const avgDonation = runnersArr => {
     const newArr = Array.from(runnersArr);
     let ticketPriceAvg = newArr.reduce(((acc, currentItem) => acc + currentItem.donation), 0) / newArr.length;
     newArr.forEach(item => item.donation < ticketPriceAvg ? item.generosity = false : item.generosity = true);
-    console.log(JSON.stringify(newArr));
+    console.log("Generosity of runners is: ", JSON.stringify(newArr));
 }
 avgDonation(runners);
 
 
 // Problem 5 -shirt company announced, that their sizes are slightly off and they should size-up every runners tshirt -> so every runner's size of tshirt changed.
 const upShirts = runnersArr => {
-    const newArr = Array.from(runnersArr);
-    for (i = 0; i < newArr.length; i++) {
-        switch (newArr[i].shirt_size) {
-            case 'XS': newArr[i].shirt_size = 'S';
+    const newArr2 = Array.from(runnersArr);
+    for (i = 0; i < newArr2.length; i++) {
+        switch (newArr2[i].shirt_size) {
+            case 'XS': newArr2[i].shirt_size = 'S';
             break;
-            case 'S': newArr[i].shirt_size = 'M';
+            case 'S': newArr2[i].shirt_size = 'M';
             break;
-            case 'M': newArr[i].shirt_size = 'L';
+            case 'M': newArr2[i].shirt_size = 'L';
             break;
-            case 'L': newArr[i].shirt_size = 'XL';
+            case 'L': newArr2[i].shirt_size = 'XL';
             break;
-            case 'XL': newArr[i].shirt_size = '2XL';
+            case 'XL': newArr2[i].shirt_size = '2XL';
             break;
-            case '2XL': newArr[i].shirt_size = '3XL';
+            case '2XL': newArr2[i].shirt_size = '3XL';
             break;
-            case '3XL': newArr[i].shirt_size = '4XL';
+            case '3XL': newArr2[i].shirt_size = '4XL';
             break;
         }
     }
-    console.log(JSON.stringify(newArr));
+    console.log("Upped shirt size of runners is: ", JSON.stringify(newArr2));
 }
 upShirts(runners);
