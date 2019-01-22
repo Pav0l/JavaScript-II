@@ -101,7 +101,7 @@ calcDonations(runners);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  
 // Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1 - find the biggest donor
+// Problem 1 - find the biggest donor - first name, last name, company and donation.
 const biggestDonor = runnersArr => {
     const newArr = Array.from(runnersArr);
     let donor = {};
@@ -134,9 +134,12 @@ countShirtSizes(runners);
 // Problem 3 - find all email adresses without .com ending
 const mailFilter = runnersArr => {
     const newArr = Array.from(runnersArr);
-    // let mailArr = newArr.map(item => item.email);
-    // let filtMail = mailArr.filter(item => !item.includes('.com'));
-    let filtMail = newArr.map(item => item.email).filter(item => !item.includes('.com'));
+    let mailArr = newArr.map(item => item.email);
+    let filtMail = mailArr.filter(item => !item.includes('.com'));
+    // let filtMail = newArr.map(item => item.email).filter(item => !item.includes('.com'));  // One liner
     console.log(filtMail);
 }
 mailFilter(runners);
+
+
+// Problem 4 - Calculate the average donation per runner and then add a new key:value pair that states whether runners are above or below the average donation.
