@@ -121,8 +121,7 @@ biggestDonor(runners);
 // Problem 2 - Count how many shirts of each size will the organizators need
 const countShirtSizes = runnersArr => {
     const newArr = Array.from(runnersArr);
-    let allShirts = [];
-    allShirts = newArr.map(item => item.shirt_size);
+    let allShirts = newArr.map(item => item.shirt_size);
     const shirtsObj = {};
     allShirts.forEach(item => {
         shirtsObj[item] = (shirtsObj[item] || 0) + 1;
@@ -143,3 +142,35 @@ mailFilter(runners);
 
 
 // Problem 4 - Calculate the average donation per runner and then add a new key:value pair that states whether runners are above or below the average donation.
+const avgDonation = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    let ticketPriceAvg = newArr.reduce(((acc, currentItem) => acc + currentItem.donation), 0) / newArr.length;
+    newArr.forEach(item => item.donation < ticketPriceAvg ? item.generosity = false : item.generosity = true);
+    console.log(JSON.stringify(newArr));
+}
+avgDonation(runners);
+
+// Problem 5 -shirt company announced, that their sizes are slightly off and they should size-up every runners tshirt -> so every runner's size of tshirt changed.
+const upShirts = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    for (i = 0; i < newArr.length; i++) {
+        switch (newArr[i].shirt_size) {
+            case 'XS': newArr[i].shirt_size = 'S';
+            break;
+            case 'S': newArr[i].shirt_size = 'M';
+            break;
+            case 'M': newArr[i].shirt_size = 'L';
+            break;
+            case 'L': newArr[i].shirt_size = 'XL';
+            break;
+            case 'XL': newArr[i].shirt_size = '2XL';
+            break;
+            case '2XL': newArr[i].shirt_size = '3XL';
+            break;
+            case '3XL': newArr[i].shirt_size = '4XL';
+            break;
+        }
+    }
+    console.log(newArr);
+}
+upShirts(runners);
