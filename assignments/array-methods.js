@@ -114,11 +114,29 @@ const biggestDonor = runnersArr => {
         }
         return acc;
     }, 0);
-    console.log(`Biggest donor is ${donor.first_name} ${donor.last_name} from ${donor.company} with donation of ${biggestDonation} BTC.`);
+    console.log(`The biggest donor is ${donor.first_name} ${donor.last_name} from ${donor.company} with donation of ${biggestDonation} BTC.`);
 }
 biggestDonor(runners);
 
-// Problem 2
+// Problem 2 - Count how many shirts of each size will the organizators need
+const countShirtSizes = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    let allShirts = [];
+    allShirts = newArr.map(item => item.shirt_size);
+    const shirtsObj = {};
+    allShirts.forEach(item => {
+        shirtsObj[item] = (shirtsObj[item] || 0) + 1;
+    })
+    console.log(shirtsObj);
+}
+countShirtSizes(runners);
 
-
-// Problem 3
+// Problem 3 - find all email adresses without .com ending
+const mailFilter = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    // let mailArr = newArr.map(item => item.email);
+    // let filtMail = mailArr.filter(item => !item.includes('.com'));
+    let filtMail = newArr.map(item => item.email).filter(item => !item.includes('.com'));
+    console.log(filtMail);
+}
+mailFilter(runners);
