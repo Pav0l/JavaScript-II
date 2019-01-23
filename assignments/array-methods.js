@@ -1,4 +1,5 @@
-// A local community center is holding a fund rasising 5k fun run and has invited 50 small businesses to make a small donation on their behalf for some much needed updates to their facilities.  Each business has assigned a representative to attend the event along with a small donation.
+// A local community center is holding a fund rasising 5k fun run and has invited 50 small businesses to make a small donation on their behalf for some much needed updates to their facilities.
+//   Each business has assigned a representative to attend the event along with a small donation.
 
 // Scroll to the bottom of the list to use some advanced array methods to help the event director gather some information from the businesses.
 
@@ -55,29 +56,126 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
-let fullName = [];
-console.log(fullName);
+const getFullName = runnersArr => {
+    let fullName = [];
+    const newArr = Array.from(runnersArr);
+    newArr.forEach(item => fullName.push(`${item.first_name} ${item.last_name}`));   //this could be a one-liner
+    console.log("Array of full names: ", fullName);
+}
+getFullName(runners);
+
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
-let allCaps = [];
-console.log(allCaps); 
+const drunkDirectorRequest = runnersArr => {
+    let allCaps = [];
+    const newArr = Array.from(runnersArr);
+    newArr.map(items => allCaps.push(items.first_name.toUpperCase()));   //this could be a one-liner
+    console.log("Array of uppercase names: ", allCaps);
+}
+drunkDirectorRequest(runners);
+
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-let largeShirts = [];
-console.log(largeShirts);
+const largeRunners = (runnersArr, size) => {
+    let largeShirts = [];
+    const newArr = Array.from(runnersArr);
+    largeShirts = newArr.filter(items => items.shirt_size === size);  //this could be a one-liner
+    console.log("Array of runners with L size shirts: ", largeShirts);
+}
+largeRunners(runners, 'L');
+
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
-console.log(ticketPriceTotal);
+const calcDonations = runnersArr => {
+    let ticketPriceTotal = [];
+    const newArr = Array.from(runnersArr);
+    const reducer = (accumulator, currentItem) => accumulator + currentItem.donation;
+    ticketPriceTotal = newArr.reduce(reducer, 0);    
+    console.log(`Total ticket price is ${ticketPriceTotal}.` );
+}
+calcDonations(runners);
+
 
 // ==== Challenge 5: Be Creative ====
-// Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
+// Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  
+// Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1 - find the biggest donor - first name, last name, company and donation.
+const biggestDonor = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    let donor = {};
+    let biggestDonation = newArr.reduce((acc, currItem) => {
+        if (acc < currItem.donation) {
+            acc = currItem.donation;
+            donor.first_name = currItem.first_name;
+            donor.last_name = currItem.last_name;
+            donor.company = currItem.company_name;
+        }
+        return acc;
+    }, 0);
+    console.log(`The biggest donor is ${donor.first_name} ${donor.last_name} from ${donor.company} with donation of ${biggestDonation} BTC.`);
+}
+biggestDonor(runners);
 
-// Problem 2
 
-// Problem 3
+// Problem 2 - Count how many shirts of each size will the organizators need
+const countShirtSizes = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    let allShirts = newArr.map(item => item.shirt_size);
+    const shirtsObj = {};
+    allShirts.forEach(item => {
+        shirtsObj[item] = (shirtsObj[item] || 0) + 1;
+    })
+    console.log("Organizators will need this many shirts: ", shirtsObj);
+}
+countShirtSizes(runners);
+
+
+// Problem 3 - find all email adresses without .com ending
+const mailFilter = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    let mailArr = newArr.map(item => item.email);
+    let filtMail = mailArr.filter(item => !item.includes('.com'));
+    // let filtMail = newArr.map(item => item.email).filter(item => !item.includes('.com'));  // One liner
+    console.log("Emails without .com are: ", filtMail);
+}
+mailFilter(runners);
+
+
+// Problem 4 - Calculate the average donation per runner and then add a new key:value pair that states whether runners are above or below the average donation.
+const avgDonation = runnersArr => {
+    const newArr = Array.from(runnersArr);
+    let ticketPriceAvg = newArr.reduce(((acc, currentItem) => acc + currentItem.donation), 0) / newArr.length;
+    newArr.forEach(item => item.donation < ticketPriceAvg ? item.generosity = false : item.generosity = true);
+    console.log("Generosity of runners is: ", JSON.stringify(newArr));
+}
+avgDonation(runners);
+
+
+// Problem 5 -shirt company announced, that their sizes are slightly off and they should size-up every runners tshirt -> so every runner's size of tshirt changed.
+const upShirts = runnersArr => {
+    const newArr2 = Array.from(runnersArr);
+    for (i = 0; i < newArr2.length; i++) {
+        switch (newArr2[i].shirt_size) {
+            case 'XS': newArr2[i].shirt_size = 'S';
+            break;
+            case 'S': newArr2[i].shirt_size = 'M';
+            break;
+            case 'M': newArr2[i].shirt_size = 'L';
+            break;
+            case 'L': newArr2[i].shirt_size = 'XL';
+            break;
+            case 'XL': newArr2[i].shirt_size = '2XL';
+            break;
+            case '2XL': newArr2[i].shirt_size = '3XL';
+            break;
+            case '3XL': newArr2[i].shirt_size = '4XL';
+            break;
+        }
+    }
+    console.log("Upped shirt size of runners is: ", JSON.stringify(newArr2));
+}
+upShirts(runners);
